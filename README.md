@@ -53,10 +53,35 @@ Coolant temperature didn't vary much, only 16.2 degrees. The low standard deviat
 
 This graph visualizes the RPM range mentioned in analysis, showing how engine speed varied from idle to maximum throughout the test session.
 
+---
+
 ### Graph 2: Coolant Temperature Over Time
 ![Temperature Stability](temperature_stability.png)
 
 This graph visualizes the temperature stability mentioned in analysis, demonstrating consistent cooling system performance despite varying engine loads.
+
+---
+
+### Graph 3: Engine RPM vs Throttle Position
+![RPM vs Throttle](rpm_vs_throttle.png)
+
+This scatter plot shows the relationship between how far the gas pedal was pressed (throttle) and the resulting engine speed (RPM). Each dot represents one moment in time. The pattern shows that higher throttle positions generally result in higher RPMs, though there's variation due to factors like gear selection and vehicle speed.
+
+---
+
+### Graph 4: Distribution of Engine RPM
+![RPM Distribution](rpm_distribution.png)
+
+This histogram shows how much time was spent at different RPM ranges. The tall bars on the left indicate the driver spent most of the time at lower RPMs (2,000-4,000 range), consistent with cruising behavior. The smaller bars extending to the right show occasional high-RPM usage, confirming the mix of casual driving with brief performance bursts.
+
+---
+
+### Graph 5: Throttle Position Over Time
+![Throttle Over Time](throttle_over_time.png)
+
+This graph tracks the gas pedal position throughout the test session. Most of the time, the throttle stays near the bottom (light cruising), but there are several spikes where the driver pushed the pedal down significantly. The spike reaching 100% shows the moment when full throttle was applied.
+
+---
 
 ## Conclusions
 - The vehicle demonstrated high-performance characteristics with a maximum RPM of 12,805
@@ -74,4 +99,10 @@ This graph visualizes the temperature stability mentioned in analysis, demonstra
 - `can_data.csv` - Raw data file
 - `rpm_over_time.png` - RPM visualization
 - `temperature_stability.png` - Temperature visualization
+- `rpm_vs_throttle.png` - RPM vs throttle scatter plot
+- `rpm_distribution.png` - RPM distribution histogram
+- `throttle_over_time.png` - Throttle position visualization
 - `README.md` - This file
+
+# Post Submission Updates:
+- Last three graphs
