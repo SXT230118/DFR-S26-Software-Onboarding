@@ -1,21 +1,22 @@
 # Import libraries
 import pandas as pd
-import matplotlib.pyplot as plt
 
-# Show all columns instead of cutting middle out
-pd.set_option('display.max_columns', None)  # Show all columns
-pd.set_option('display.width', None)        # Don't wrap to new lines
-pd.set_option('display.max_colwidth', None) # Show full column names
+# === Step 1: Load the CSV file into a pandas DataFrame and see what you're 
+# working with
 
-# Load the CSV file into a DataFrame
+# Configure pandas display settings
+pd.set_option('display.max_columns', None)  # Display all columns, no limit
+# pd.set_option('display.width', None)        # Don't wrap information to next line
+
+# Load csv file into a DataFrame
 df = pd.read_csv('can_data.csv')
 
-# Display basic information about dataset
-print("Dataset Overview:")
-print(df.info())
-print("\nFirst few rows:")
-print(df.head())
+# Print some data here as needed instead of scrolling through csv file
+print("Display overview of data: ") 
+print(df.info())                            # Col names, data types, missing vals
 
-# Show all column names
-print("\nAll column names:")
-print(df.columns.tolist())
+print("First few rows: ")
+print(df.head(10))
+
+# === Cleaning data === 
+# After looking
