@@ -1,5 +1,6 @@
 # Import libraries
 import pandas as pd
+import matplotlib.pyplot as plt
 
 # === Step 1: Load the CSV file into a pandas DataFrame and see what you're 
 # working with
@@ -43,23 +44,75 @@ print(f"Rows removed: {len(df) - len(df_clean)}")
 # easily readable format
 df_clean['timestamp'] = pd.to_datetime(df_clean['timestamp'], unit='s')
 
-print("\nCleaned data preview:")            # Should mostly be 34 onward
+print("\nCleaned data preview: ")            # Should mostly be 34 onward
 print(df_clean.head())
 
 # === Step 3: Derive some insight from the data, either a new value, or some 
-# sort of statistic that can be visualized
+# sort of statistic that can be visualized. I wasn't sure exactly what to do here
+# because I'm not too familiar with what data is most important.
 print("\n=== STEP 3: \n")
 
-# Basic statistics for key metrics
+# Basic statistics for key metrics (count, mean, std, min, max, etc)
+print("Basic statistics for some key metrics: ")
 
+# RPM data
 print("\nRPM Statistics:")
-print(df_clean['RPM'].describe())
+rpm_stats = df_clean['RPM'].describe()
+print(rpm_stats)
 
-print("\nThrottle Position (TPS) Statistics:")
-print(df_clean['TPS'].describe())
+# RPM stats analysis
+print(f"The average RPM was {rpm_stats['mean']:.0f}, but the median was {rpm_stats['50%']:.0f}.")
+print(f"This could mean that while the driver spent more time at lower RPMs, there were high-RPM")
+print (f" moments.")
 
+# Throttle Position Statistics
+print("\nThrottle Position Statistics:")
+tps_stats = df_clean['TPS'].describe()
+print(tps_stats)
+
+# Throttle Position analysis
+print(f"The median throttle position was {tps_stats['50%']:.1f}%, indicating that the driver")
+print(f" not really hitting the gas pedal (cruising) for most of the drive.")
+print(f"However, the maximum throttle reached {tps_stats['max']:.1f}% at one point, indicating")
+print(f" that the driver used full throttle at least once, maybe during a particularly long, clean")
+print(f" stretch of road/track or just for occasional acceleration.")
+
+# Coolant Temperature Statistics
 print("\nCoolant Temperature Statistics:")
-print(df_clean['Coolant Temp'].describe())
+temp_stats = df_clean['Coolant Temp'].describe()
+print(temp_stats)
 
-print("\nBattery Voltage Statistics:")
-print(df_clean['Battery Volt'].describe())
+# Coolant Temperature analysis
+temp_range = temp_stats['max'] - temp_stats['min']
+print(f"Coolant temperature didn't vary much, only {temp_range:.1f} degrees")
+print(f"The low standard deviation, {temp_stats['std']:.1f}, indicates stable temperature control.")
+
+# === Step 4: Create at least 2 different types of graphs to visualize what you came up with
+print("\n=== STEP 4: \n")
+
+# Graph 1: RPM Over Time (RPM range from analysis)
+plt.figure(figsize=(12, 6))
+plt.plot(df_clean['timestamp'], df_clean['RPM'], color='blue', linewidth=0.8)
+plt.title('Engine RPM Over Time - Shows Range from Idle to Maximum', fontsize=14, fontweight='bold')
+plt.xlabel('Time', fontsize=12)
+plt.ylabel('RPM', fontsize=12)
+plt.grid(True, alpha=0.3)
+plt.tight_layout()
+plt.savefig('rpm_over_time.png', dpi=300)
+print("Graph 1: rpm_over_time.png")
+print("  (Visualizes the RPM range mentioned in analysis)")
+plt.close()
+
+# Graph 2: Temperature Stability Over Time
+plt.figure(figsize=(12, 6))
+plt.plot(df_clean['timestamp'], df_clean['Coolant Temp'], color='red', linewidth=0.8)
+plt.title('Coolant Temperature Over Time - Shows Stability', fontsize=14, fontweight='bold')
+plt.xlabel('Time', fontsize=12)
+plt.ylabel('Temperature', fontsize=12)
+plt.grid(True, alpha=0.3)
+plt.tight_layout()
+plt.savefig('temperature_stability.png', dpi=300)
+print("Graph 2: temperature_stability.png")
+print("  (Visualizes the temperature stability mentioned in analysis)")
+plt.close()
+
